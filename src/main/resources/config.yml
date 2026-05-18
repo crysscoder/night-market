@@ -1,0 +1,11 @@
+check-interval-seconds: 300
+despawn-seconds: 240
+spawn-radius: 18
+messages:
+  prefix: "&7[&aNightMarket&7]"
+  only-player: "%prefix% &fКоманда доступна только игроку."
+  no-permission: "%prefix% &fНет прав."
+  reloaded: "%prefix% &fКонфиг перезагружен."
+  spawned: "%prefix% &fНочной торговец появился рядом с &a%player%&f."
+  despawned: "%prefix% &fНочной торговец ушёл."
+  no-player: "%prefix% &fНет подходящего игрока."

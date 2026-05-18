@@ -1,0 +1,16 @@
+name: NightMarket
+version: ${version}
+main: io.github.crysscoder.nightmarket.NightMarketPlugin
+api-version: '1.21'
+author: crysscoder
+description: Timed night trader for Paper servers.
+commands:
+  nightmarket:
+    description: Manage night market.
+    usage: /nightmarket
+    aliases:
+      - nmarket
+permissions:
+  nightmarket.admin:
+    description: Manage NightMarket.
+    default: op
