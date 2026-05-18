@@ -26,6 +26,7 @@ import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 
 public final class NightMarketPlugin extends JavaPlugin implements CommandExecutor, TabCompleter {
     private UUID activeTrader;
+    private long spawnTicket;
     private final LegacyComponentSerializer legacy = LegacyComponentSerializer.legacyAmpersand();
 
     @Override
@@ -108,7 +109,12 @@ public final class NightMarketPlugin extends JavaPlugin implements CommandExecut
         trader.setRemoveWhenFarAway(false);
         trader.setRecipes(recipes());
         activeTrader = trader.getUniqueId();
-        Bukkit.getScheduler().runTaskLater(this, this::despawn, Math.max(30L, getConfig().getLong("despawn-seconds", 240L)) * 20L);
+        long ticket = ++spawnTicket;
+        Bukkit.getScheduler().runTaskLater(this, () -> {
+            if (spawnTicket == ticket) {
+                despawn();
+            }
+        }, Math.max(30L, getConfig().getLong("despawn-seconds", 240L)) * 20L);
         Bukkit.broadcast(message("spawned", Map.of("player", player.getName())));
     }
 
@@ -121,6 +127,7 @@ public final class NightMarketPlugin extends JavaPlugin implements CommandExecut
             entity.remove();
         }
         activeTrader = null;
+        spawnTicket++;
     }
 
     private List<MerchantRecipe> recipes() {
